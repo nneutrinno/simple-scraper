@@ -1,67 +1,56 @@
-import { Result, DeviceType } from "./lib/types"
-import puppeteer from 'puppeteer'
-
-
-interface SearchAndResult {
-    search: string
-    result: Result
-}
-
-
-interface Option {
-    device: {
-        type: DeviceType
-    }
-    searchs: string[]
-}
-interface Process {
-    browser: puppeteer.Browser
-    result: Result[]
-}
-
-interface Pipeline {
-    options: Option
-    process: Process
-}
+import {
+    DeviceType,
+    Option,
+    Process,
+    ProcessingPipeline,
+    Pipeline,
+} from "./lib/types"
+import puppeteer, { devices } from 'puppeteer'
 
 async function main(): Promise<void> {
     const options: Option = {
-        
+        device: {
+            type: DeviceType.Blackberry,
+        },
+        searchs: [
+            'dia de não sei',
+            'foo',
+            'bar',
+            'xpto',
+        ]
     }
-    const searchs: string[] = [
-        'dia de não sei',
-        'foo',
-        'bar',
-        'xpto',
-    ]
+
+    const processing: ProcessingPipeline = {
+        options,
+        process: {},
+    }
 
     await Promise
-        .resolve(searchs)
+        .resolve(processing)
         .then(addBrowser)
         .then(addSearchResults)
     .then(console.log)
     
-    async function addBrowser(searchs: string[]): Promise<Partial<Pipeline>> {
+    async function addBrowser(pipeline: ProcessingPipeline): Promise<ProcessingPipeline> {
         const browser: puppeteer.Browser = await puppeteer.launch({
             headless: false
         })
-
-        const page = browser.newPage()
-        ;(await page).emulate(devices[DeviceType.Blackberry])
-        return {
-            browser,
-            searchs,
-        }
-    }
-    async function addSearchResults(pipeline: Pipeline) {
+        
         return {
             ...pipeline,
-            // result: pipeline.searchs.map(search)
+            process: {
+                browser,
+            },
         }
-        // async function search(text: string): Promise<Result[]> {
-        //     const page = 
-        //     return
-        // }
+    }
+    async function addSearchResults(pipeline: ProcessingPipeline): Promise<ProcessingPipeline> {
+        const page = await pipeline.process.browser.newPage()
+        await page.emulate(devices[DeviceType.Blackberry])
+
+        return {
+            ...pipeline,
+        }
+        
     }
 }
 
