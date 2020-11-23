@@ -9,6 +9,9 @@
   "author": "<gabriel.freitas@colmeia.me>",
   "license": "MIT",
   "dependencies": {
+    "@types/puppeteer": "^5.4.0",
+    "aigle": "^1.14.1",
+    "puppeteer": "^5.5.0",
     "sucrase": "^3.16.0"
   }
 }

@@ -5,3 +5,7 @@ export interface Result {
     link: string;
     contentLength: number;
 }
+
+export enum DeviceType {
+    Blackberry = 'blackberry',
+}
