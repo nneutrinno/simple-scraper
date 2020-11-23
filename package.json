@@ -1,0 +1,8 @@
+{
+  "name": "simple-scraper",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:nneutrinno/simple-scraper.git",
+  "author": "<gabriel.freitas@colmeia.me>",
+  "license": "MIT"
+}
