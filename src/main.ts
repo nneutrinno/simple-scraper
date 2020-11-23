@@ -4,6 +4,7 @@ import {
     Process,
     ProcessingPipeline,
     Pipeline,
+    Result
 } from "./lib/types"
 import puppeteer, { devices } from 'puppeteer'
 
@@ -47,11 +48,16 @@ async function main(): Promise<void> {
         const page = await pipeline.process.browser.newPage()
         await page.emulate(devices[DeviceType.Blackberry])
 
+        await page.goto(`https://www.google.com/search?q=${options.searchs[0].replace(' ', '=')}`)
+
+        
+
         return {
             ...pipeline,
         }
         
     }
+
 }
 
 
