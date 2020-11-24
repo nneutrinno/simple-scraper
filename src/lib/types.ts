@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer'
 
-export interface Result {
+export interface SearchResult {
     searched: string
     title: string
     description: string
@@ -21,7 +21,7 @@ export interface Option {
 }
 export interface Process {
     browser: puppeteer.Browser
-    result: Result[]
+    result: SearchResult[]
 }
 
 export interface ProcessingPipeline {
