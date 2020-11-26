@@ -29,6 +29,12 @@ export interface ProcessingPipeline {
     process: Partial<Process>
 }
 
+
+export interface CreateSearchProcessing{
+    pipeline: ProcessingPipeline,
+    to: string
+}
+
 export type Pipeline = Compute<DeepRequired<ProcessingPipeline>>
 export type Compute<T> = { [key in keyof T]: T[key] } & {}
 export type DeepRequired<Source> = { [key in keyof Source]: Source[key] extends object ? Required<Source[key]> : Source[key] }

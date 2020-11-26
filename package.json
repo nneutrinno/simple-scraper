@@ -13,5 +13,6 @@
     "aigle": "^1.14.1",
     "puppeteer": "^5.5.0",
     "sucrase": "^3.16.0"
-  }
+  },
+  "devDependencies": {}
 }
